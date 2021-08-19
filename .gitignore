@@ -1,7 +1,6 @@
 # Model files and data files
-./materials
-./datasets
-./save
+materials/
+save/
 
 
 # Byte-compiled / optimized / DLL files
