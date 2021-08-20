@@ -36,6 +36,11 @@ class MiniImageNet(Dataset):
     label_key = sorted(np.unique(label))
     label_map = dict(zip(label_key, range(len(label_key))))
     new_label = np.array([label_map[x] for x in label])
+
+    print("label_key", label_key)
+    # print("Image Example", np.array(data[0]))
+    # data[0].save("./image_example.png")
+    
     
     self.root_path = root_path
     self.split_tag = split_tag
@@ -43,6 +48,7 @@ class MiniImageNet(Dataset):
 
     self.data = data
     self.label = new_label
+    # self.label = label
     self.n_classes = len(label_key)
 
     if normalization:
@@ -87,6 +93,9 @@ class MetaMiniImageNet(MiniImageNet):
     for cat in range(self.n_classes):
       self.catlocs += (np.argwhere(self.label == cat).reshape(-1),)
 
+    # print("catlocs", self.catlocs[0])
+    # print("Index Image Example", np.array(self.data[100]))
+
     self.val_transform = get_transform(
       val_transform, image_size, self.norm_params)
 
@@ -95,7 +104,9 @@ class MetaMiniImageNet(MiniImageNet):
 
   def __getitem__(self, index):
     shot, query = [], []
+    # Random choose n way classes of all test classes
     cats = np.random.choice(self.n_classes, self.n_way, replace=False)
+    # construct support set and query set for each category. 
     for c in cats:
       c_shot, c_query = [], []
       idx_list = np.random.choice(

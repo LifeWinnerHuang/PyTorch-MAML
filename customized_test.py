@@ -26,7 +26,15 @@ def main(config):
   dataset = datasets.make(config['dataset'], **config['test'])
   utils.log('meta-test set: {} (x{}), {}'.format(
     dataset[0][0].shape, len(dataset), dataset.n_classes))
-  print(dataset)
+  print("dataset object:", dataset)
+  print(dataset.__dict__.keys())
+  # keys: ['root_path', 'split_tag', 'image_size', 'data', 'label', 
+  # 'n_classes', 'norm_params', 'transform', 'convert_raw', 'n_batch', 
+  # 'n_episode', 'n_way', 'n_shot', 'n_query', 'catlocs', 'val_transform'])
+
+  print('root_path', dataset.root_path)
+  print('split_tag', dataset.split_tag)
+  print('label', dataset.label)
 
   loader = DataLoader(dataset, config['test']['n_episode'],
     collate_fn=datasets.collate_fn, num_workers=1, pin_memory=True)
@@ -51,6 +59,7 @@ def main(config):
   aves_va = utils.AverageMeter()
   va_lst = []
 
+  print(loader)
   
   # for data in tqdm(loader, leave=False):
   for data in loader:
@@ -62,6 +71,7 @@ def main(config):
     print('meta-test x_query: {} (x{})'.format(x_query.shape, len(x_query) ) )
     print('meta-test y_shot: {} (x{})'.format(y_shot.shape, len(y_shot) ) )
     print('meta-test y_query: {} (x{})'.format(y_query.shape, len(y_query) ) )
+    
 
     if inner_args['reset_classifier']:
       if config.get('_parallel'):
@@ -75,14 +85,13 @@ def main(config):
     
     pred = torch.argmax(logits, dim=1)
     acc = utils.compute_acc(pred, labels)
-    print("accuracy", acc)
+    # print("accuracy", acc)
     aves_va.update(acc, 1)
     va_lst.append(acc)
-    print("#####\n")
+    # print("#####\n")
 
   print("Accuracy value list", va_lst)
-  print('test epoch {}: acc={:.2f} +- {:.2f} (%)'.format(
-    epoch, aves_va.item() * 100, 
+  print('Meta test: acc={:.2f} +- {:.2f} (%)'.format(aves_va.item() * 100, 
     utils.mean_confidence_interval(va_lst) * 100))
 
 

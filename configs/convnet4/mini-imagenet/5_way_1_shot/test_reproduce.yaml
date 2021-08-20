@@ -8,7 +8,7 @@ test:
   n_episode: 1 # original value 4
   n_way: 5
   n_shot: 1
-  n_query: 1
+  n_query: 1 # original value 1
 
 load: ./save/convnet4_mini-imagenet_5_way_1_shot/max-va.pth
 
