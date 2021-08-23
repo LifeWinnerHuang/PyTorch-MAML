@@ -67,10 +67,10 @@ def main(config):
     x_shot, y_shot = x_shot.cuda(), y_shot.cuda()
     x_query, y_query = x_query.cuda(), y_query.cuda()
     # print("data", data)
-    print('meta-test x_shot: {} (x{})'.format(x_shot.shape, len(x_shot) ) )
-    print('meta-test x_query: {} (x{})'.format(x_query.shape, len(x_query) ) )
-    print('meta-test y_shot: {} (x{})'.format(y_shot.shape, len(y_shot) ) )
-    print('meta-test y_query: {} (x{})'.format(y_query.shape, len(y_query) ) )
+    # print('meta-test x_shot: {} (x{})'.format(x_shot.shape, len(x_shot) ) )
+    # print('meta-test x_query: {} (x{})'.format(x_query.shape, len(x_query) ) )
+    # print('meta-test y_shot: {} (x{})'.format(y_shot.shape, len(y_shot) ) )
+    # print('meta-test y_query: {} (x{})'.format(y_query.shape, len(y_query) ) )
     
 
     if inner_args['reset_classifier']:

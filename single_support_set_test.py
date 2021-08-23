@@ -60,10 +60,10 @@ def main(config):
 
   # very good and bad support set examples
   # Good Example 1: very similar image, result all correct.
-  # support_set_idlist = [[70], [650], [1200], [1809], [2400]]
-  # support_set_labellist = [0, 1, 2, 3, 4]
-  # query_set_idlist = [[71], [652], [1203], [1812], [2401]]
-  # query_set_labellist = [0, 1, 2, 3, 4]
+  support_set_idlist = [[70], [650], [1200], [1809], [2400]]
+  support_set_labellist = [0, 1, 2, 3, 4]
+  query_set_idlist = [[71], [652], [1203], [1812], [2401]]
+  query_set_labellist = [0, 1, 2, 3, 4]
   # Bad Exmple 1: accuracy can be zero, zero example:
   # support_set_idlist = [[0], [600], [1200], [1800], [2400]]
   # support_set_labellist = [0, 1, 2, 3, 4]
@@ -131,10 +131,10 @@ def main(config):
   x_query, y_query = x_query.cuda(), y_query.cuda()
   # print("data", data)
   # print(x_shot)
-  print('meta-test x_shot: {} (x{})'.format(x_shot.shape, len(x_shot) ) )
-  print('meta-test x_query: {} (x{})'.format(x_query.shape, len(x_query) ) )
-  print('meta-test y_shot: {} (x{})'.format(y_shot.shape, len(y_shot) ) )
-  print('meta-test y_query: {} (x{})'.format(y_query.shape, len(y_query) ) )
+  # print('meta-test x_shot: {} (x{})'.format(x_shot.shape, len(x_shot) ) )
+  # print('meta-test x_query: {} (x{})'.format(x_query.shape, len(x_query) ) )
+  # print('meta-test y_shot: {} (x{})'.format(y_shot.shape, len(y_shot) ) )
+  # print('meta-test y_query: {} (x{})'.format(y_query.shape, len(y_query) ) )
 
   # if inner_args['reset_classifier']:
   #     if config.get('_parallel'):
