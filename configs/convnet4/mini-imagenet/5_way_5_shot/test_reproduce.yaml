@@ -4,8 +4,8 @@ test:
   image_size: 84
   normalization: False
   transform: null
-  n_batch: 150
-  n_episode: 4
+  n_batch: 600 # original value 150
+  n_episode: 1 # original value 4
   n_way: 5
   n_shot: 5
   n_query: 5

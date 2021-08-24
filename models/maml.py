@@ -207,6 +207,7 @@ class MAML(Module):
 
     # a dictionary of parameters that will be updated in the inner loop
     params = OrderedDict(self.named_parameters())
+    # Here it performs freezing of layers. 
     for name in list(params.keys()):
       if not params[name].requires_grad or \
         any(s in name for s in inner_args['frozen'] + ['temp']):
@@ -222,6 +223,24 @@ class MAML(Module):
             m.eval()
       updated_params = self._adapt(
         x_shot[ep], y_shot[ep], params, ep, inner_args, meta_train)
+
+      print_layer_change = False
+      # Compute euclidean distance of parameter change
+      if print_layer_change:
+        for name in list(params.keys()):
+          if 'bias' not in name:
+            print("### Param layer name {} , dimensions {} ###".format(name, params[name].size()))
+            euclid_dist = torch.cdist(params[name], updated_params[name])
+            print("Euclidean distance mean {},\t std {} ".format(euclid_dist.mean(), euclid_dist.std()))
+            # print("Updated Params {}".format(name))
+          else:
+            ...
+            # Note that euclidean wise bias does not update almost, so no need to print
+            # print("### Param layer name {} , dimensions {} ###".format(name, params[name].size()))
+            # euclid_dist = torch.cdist(params[name].unsqueeze(0), updated_params[name].unsqueeze(0))
+            # print("Euclidean distance mean {} ".format(euclid_dist.mean()))
+            # print("Updated Params {}".format(name))
+
       # inner-loop validation
       with torch.set_grad_enabled(meta_train):
         self.eval()
