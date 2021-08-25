@@ -60,15 +60,15 @@ def main(config):
 
   # very good and bad support set examples
   # Good Example 1: very similar image, result all correct.
-  # support_set_idlist = [[70], [650], [1200], [1809], [2400]]
-  # support_set_labellist = [0, 1, 2, 3, 4]
-  # query_set_idlist = [[71], [652], [1203], [1812], [2401]]
-  # query_set_labellist = [0, 1, 2, 3, 4]
-  # Bad Exmple 1: accuracy can be zero, zero example:
-  support_set_idlist = [[0], [600], [1200], [1800], [2400]]
+  support_set_idlist = [[70], [650], [1200], [1809], [2400]]
   support_set_labellist = [0, 1, 2, 3, 4]
-  query_set_idlist = [[409], [601], [1201], [1813], [2674]]
+  query_set_idlist = [[71], [652], [1203], [1812], [2401]]
   query_set_labellist = [0, 1, 2, 3, 4]
+  # Bad Exmple 1: accuracy can be zero, zero example:
+  # support_set_idlist = [[0], [600], [1200], [1800], [2400]]
+  # support_set_labellist = [0, 1, 2, 3, 4]
+  # query_set_idlist = [[409], [601], [1201], [1813], [2674]]
+  # query_set_labellist = [0, 1, 2, 3, 4]
 
   n_way = config['test']['n_way']
   n_shot = config['test']['n_shot']

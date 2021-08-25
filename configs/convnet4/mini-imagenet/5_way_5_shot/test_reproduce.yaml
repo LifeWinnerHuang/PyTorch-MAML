@@ -18,6 +18,10 @@ inner_args:
   classifier_lr: 0.01
   first_order: False
   frozen:
-    - bn
+    - bn # default 
+    # - conv1
+    # - conv2
+    # - conv3
+    # - conv4
 
 epoch: 1

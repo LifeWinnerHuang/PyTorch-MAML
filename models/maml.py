@@ -224,15 +224,21 @@ class MAML(Module):
       updated_params = self._adapt(
         x_shot[ep], y_shot[ep], params, ep, inner_args, meta_train)
 
-      print_layer_change = False
+      print_layer_change = True
       # Compute euclidean distance of parameter change
       if print_layer_change:
         for name in list(params.keys()):
           if 'bias' not in name:
-            print("### Param layer name {} , dimensions {} ###".format(name, params[name].size()))
-            euclid_dist = torch.cdist(params[name], updated_params[name])
-            print("Euclidean distance mean {},\t std {} ".format(euclid_dist.mean(), euclid_dist.std()))
+            print("\n### Param layer name {} , dimensions {} ###".format(name, params[name].size()))
+            euclid_dist = torch.dist(params[name], updated_params[name])
+            print("### Euclidean distance sum of weights {} \t layer: {} ###".format(euclid_dist, name))
+            # print("Meta-trained model weight mean {},\t std {} ".format(params[name].mean(), params[name].std()))
+            # print("After fast adaption model weight mean {},\t std {} ".format(updated_params[name].mean(), updated_params[name].std()))
+            # print(params[name][0])
+            # print(updated_params[name][0])
+            # print(euclid_dist)
             # print("Updated Params {}".format(name))
+            # break
           else:
             ...
             # Note that euclidean wise bias does not update almost, so no need to print

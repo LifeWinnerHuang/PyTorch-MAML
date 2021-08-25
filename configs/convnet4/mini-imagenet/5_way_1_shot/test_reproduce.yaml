@@ -19,6 +19,9 @@ inner_args:
   first_order: False  # set to True for FOMAML
   frozen:
     - bn
-    # - conv
+    # - conv1
+    # - conv2
+    # - conv3
+    # - conv4
 
 epoch: 1
